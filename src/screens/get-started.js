@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {COLORS} from '../constants/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = [
   {
@@ -18,24 +19,15 @@ const data = [
   },
 ];
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  nextButton: {
-    backgroundColor: COLORS.primary,
-    padding: 5,
-  },
-});
-
-const GetStarted = () => {
+const GetStarted = ({navigation}) => {
   const renderItem = ({item}) => {
     return <ImageBackground style={styles.container} source={item.image} />;
   };
   const keyExtractor = item => item.title;
 
-  const getStarted = () => {
-    alert('Completed');
+  const getStarted = async () => {
+    await AsyncStorage.setItem('initial', 'completed');
+    navigation.navigate('Home');
   };
 
   return (
@@ -51,3 +43,13 @@ const GetStarted = () => {
 };
 
 export default GetStarted;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  nextButton: {
+    backgroundColor: COLORS.primary,
+    padding: 5,
+  },
+});

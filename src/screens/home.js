@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.containerStyle}>
-      <Text>Home</Text>
+      <Text onPress={() => navigation.navigate('Register')}>Home</Text>
     </View>
   );
 };
